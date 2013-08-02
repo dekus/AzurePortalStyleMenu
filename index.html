@@ -10,7 +10,8 @@
 		margin: 0;
 		padding: 0;
 	}
-	.nav {
+
+	.azureMenuWraper {
 		position: relative;
 		width: 200px;
 		display: block;
@@ -18,42 +19,42 @@
 		background: #3e3d4d ;
 		overflow: hidden;
 	}
-	i {
+	.azureMenuWraper i {
 		font-size: 35px;
 		width: 35px;
 	}
-	ul {
+	.azureMenuWraper ul {
 		margin: 0;
 		padding: 0;
 		width:100%;
 		display: table
 	}
-	li>ul{
+	.azureMenuWraper li>ul{
 		display: none;
 	}
 
-	li {
+	.azureMenuWraper li {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		list-style-type: none;
 	}
-	a {
+	.azureMenuWraper a {
 		padding: 5px;
 		text-decoration: none;
 		background: #3e3d4d ;
-		
 		display:table;
-    vertical-align : middle;
+	    vertical-align : middle;
 		width: 100%;
 		color:#fff;
 		border-bottom: 1px solid #4e4d5d;
 	}
-	a:hover {
+		
+	.azureMenuWraper a:hover {
 		background: #4e4d5d ;
 		
 	}
-	a > div {
+	.azureMenuWraper a > div {
 		display: table-cell;
 		vertical-align: middle;
 		text-align: left;
@@ -61,7 +62,7 @@
 		padding-left: 10px;
 	}
 
-	#secondlevelmenu {
+	.azureMenuWraper #panel {
 	    position: absolute;
 	    top:0;
 	    display: block;
@@ -70,62 +71,82 @@
 	    background: #4e4d5d;
 	}
 
-	.slideOff {
+	.azureMenuWraper .slideOff {
 		left: 210px;
 		transition: 1s;
 	}
-	.slideOn {
+	.azureMenuWraper .slideOn {
 	    transition: 1s;
 	    left: 42px;
 	}
+	.azureMenuWraper .turnOff {
+		display: none;
+	}
+	.azureMenuWraper .turnOn {
+		display: block;
+	}
 	</style>
-
+	
 </head>
 <body>
-	<div class="nav">
-		<ul id="AzureMenu">
-			<li><a href="#"><i class="icon-social-google-plus"></i><div>Финансы</div></a></li>
-			<li><a href="#"><i class="icon-map"></i><div>Документы</div></a></li>
-			<li><a href="#"><i class="icon-social-google-plus"></i><div>Товары</div></a></li>
-			<li><a href="#"><i class="icon-social-google-plus"></i><div>Услуги</div></a></li>
-			<li><a href="#"><i class="icon-social-google-plus"></i><div>Контакты</div></a></li>
+	<div class="azureMenuWraper">
+		<ul id="navigation">
+			<li><a href="#panel1"><i class="icon-social-google-plus"></i><div>Item 1</div></a></li>
+			<li><a href="#panel2"><i class="icon-map"></i><div>Item 2</div></a></li>
+			<li><a href="#panel3"><i class="icon-social-google-plus"></i><div>Item 3</div></a></li>
+			<li><a href="#panel4"><i class="icon-social-google-plus"></i><div>Item 4</div></a></li>
+			<li><a href="http://microsoft.com"><i class="icon-social-google-plus"></i><div>Item 5</div></a></li>
 		</ul>
-		<div id="secondlevelmenu" class="slideOff">
+		<div id="panel" class="slideOff">
 			<div class="backbutton">
 				<a href="#" id="backToMainMenu"><i class="backicon icon-arrow-left-light"></i></a>
 			</div>
-			<ul>
-				<li><a href="#">Основной склад</a></li>
-				<li><a href="#">Добавить склад</a></li>
-			</ul>
+			<div id="panel1" class="turnOff">
+				<ul>
+					<li><a href="#">Item 1</a></li>
+					<li><a href="#">Item 2</a></li>
+				</ul>
+			</div>
+			<div id="panel2" class="turnOff">
+				<ul>
+					<li>Item 1</li>
+					<li>Item 2</li>
+					<li>Item 3</li>
+					<li>Item 4</li>
+				</ul>				
+			</div>
+			<div id="panel3" class="turnOff">
+				<ul>
+					<li>Item 1</li>
+					<li>Item 2</li>
+					<li>Item 3</li>
+				</ul>				
+			</div>
 		</div>
 	</div>
-	
-	<!--
-		<ul>
-			<li>Счет</li>
-			<li>Акт</li>
-			<li>Приходная накладная</li>
-			<li>Расходная накладная</li>
-		</ul>
-		<ul>
-			<li>Доход</li>
-			<li>Расход</li>
-			<li>Счета</li>
-		</ul>
-		!-->
 		<script>
-	(function () {
-		var SLMenu = document.getElementById("secondlevelmenu");
-		function slideOn(event) {
-			SLMenu.className = "slideOn";
-		}
-		function slideOff(event) {
-			SLMenu.className = "slideOff";
-		}
-		document.getElementById("AzureMenu").onclick = slideOn;
-		document.getElementById("backToMainMenu").onclick = slideOff;
-	})();
+		(function () {
+			var SLMenu = document.getElementById("panel");
+			var currentSelectedNode = null;
+			function slideOn(event) {
+
+				if (event.target.parentNode.href) {
+					var menuTarget=event.target.parentNode.href.replace(window.location,"");
+					if (currentSelectedNode) 
+						currentSelectedNode.className="turnOff";
+					currentSelectedNode = document.getElementById(menuTarget)
+					if (currentSelectedNode) currentSelectedNode.className="turnOn";
+					SLMenu.className = "slideOn";
+					return false;
+				}
+			}
+			function slideOff(event) {
+				if (currentSelectedNode) currentSelectedNode.className="turnOff";
+				SLMenu.className = "slideOff";
+			}
+			document.getElementById("navigation").onclick = slideOn;
+			document.getElementById("backToMainMenu").onclick = slideOff;
+		})();
 	</script>
 </body>
 </html>
