@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<link rel="stylesheet" href="style.css">
+<head>
+	<meta charset="UTF-8">
+	<title>Azure Style Menu plugin</title>
+	<style>
+	body {
+		font-family: Arial, Verdata;
+		margin: 0;
+		padding: 0;
+	}
+	.nav {
+		position: relative;
+		width: 200px;
+		display: block;
+		height: 100%;
+		background: #3e3d4d ;
+		overflow: hidden;
+	}
+	i {
+		font-size: 35px;
+		width: 35px;
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+		width:100%;
+		display: table
+	}
+	li>ul{
+		display: none;
+	}
+
+	li {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		list-style-type: none;
+	}
+	a {
+		padding: 5px;
+		text-decoration: none;
+		background: #3e3d4d ;
+		
+		display:table;
+    vertical-align : middle;
+		width: 100%;
+		color:#fff;
+		border-bottom: 1px solid #4e4d5d;
+	}
+	a:hover {
+		background: #4e4d5d ;
+		
+	}
+	a > div {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: left;
+		width: 100%;
+		padding-left: 10px;
+	}
+
+	#secondlevelmenu {
+	    position: absolute;
+	    top:0;
+	    display: block;
+	    width: 250px;
+	    height: 100%;
+	    background: #4e4d5d;
+	}
+
+	.slideOff {
+		left: 210px;
+		transition: 1s;
+	}
+	.slideOn {
+	    transition: 1s;
+	    left: 42px;
+	}
+	</style>
+
+</head>
+<body>
+	<div class="nav">
+		<ul id="AzureMenu">
+			<li><a href="#"><i class="icon-social-google-plus"></i><div>Финансы</div></a></li>
+			<li><a href="#"><i class="icon-map"></i><div>Документы</div></a></li>
+			<li><a href="#"><i class="icon-social-google-plus"></i><div>Товары</div></a></li>
+			<li><a href="#"><i class="icon-social-google-plus"></i><div>Услуги</div></a></li>
+			<li><a href="#"><i class="icon-social-google-plus"></i><div>Контакты</div></a></li>
+		</ul>
+		<div id="secondlevelmenu" class="slideOff">
+			<div class="backbutton">
+				<a href="#" id="backToMainMenu"><i class="backicon icon-arrow-left-light"></i></a>
+			</div>
+			<ul>
+				<li><a href="#">Основной склад</a></li>
+				<li><a href="#">Добавить склад</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<!--
+		<ul>
+			<li>Счет</li>
+			<li>Акт</li>
+			<li>Приходная накладная</li>
+			<li>Расходная накладная</li>
+		</ul>
+		<ul>
+			<li>Доход</li>
+			<li>Расход</li>
+			<li>Счета</li>
+		</ul>
+		!-->
+		<script>
+	(function () {
+		var SLMenu = document.getElementById("secondlevelmenu");
+		function slideOn(event) {
+			SLMenu.className = "slideOn";
+		}
+		function slideOff(event) {
+			SLMenu.className = "slideOff";
+		}
+		document.getElementById("AzureMenu").onclick = slideOn;
+		document.getElementById("backToMainMenu").onclick = slideOff;
+	})();
+	</script>
+</body>
+</html>
