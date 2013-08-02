@@ -10,82 +10,9 @@
 		margin: 0;
 		padding: 0;
 	}
-
-	.azureMenuWraper {
-		position: relative;
-		width: 200px;
-		display: block;
-		height: 100%;
-		background: #3e3d4d ;
-		overflow: hidden;
-	}
-	.azureMenuWraper i {
-		font-size: 35px;
-		width: 35px;
-	}
-	.azureMenuWraper ul {
-		margin: 0;
-		padding: 0;
-		width:100%;
-		display: table
-	}
-	.azureMenuWraper li>ul{
-		display: none;
-	}
-
-	.azureMenuWraper li {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		list-style-type: none;
-	}
-	.azureMenuWraper a {
-		padding: 5px;
-		text-decoration: none;
-		background: #3e3d4d ;
-		display:table;
-	    vertical-align : middle;
-		width: 100%;
-		color:#fff;
-		border-bottom: 1px solid #4e4d5d;
-	}
-		
-	.azureMenuWraper a:hover {
-		background: #4e4d5d ;
-		
-	}
-	.azureMenuWraper a > div {
-		display: table-cell;
-		vertical-align: middle;
-		text-align: left;
-		width: 100%;
-		padding-left: 10px;
-	}
-
-	.azureMenuWraper #panel {
-	    position: absolute;
-	    top:0;
-	    display: block;
-	    width: 250px;
-	    height: 100%;
-	    background: #4e4d5d;
-	}
-
-	.azureMenuWraper .slideOff {
-		left: 210px;
-		transition: 1s;
-	}
-	.azureMenuWraper .slideOn {
-	    transition: 1s;
-	    left: 42px;
-	}
-	.azureMenuWraper .turnOff {
-		display: none;
-	}
-	.azureMenuWraper .turnOn {
-		display: block;
-	}
 	</style>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/dkslidemenu.css">
 	
 </head>
 <body>
@@ -124,29 +51,9 @@
 			</div>
 		</div>
 	</div>
+		<script src="js/dkslidemenu.js"></script>
 		<script>
-		(function () {
-			var SLMenu = document.getElementById("panel");
-			var currentSelectedNode = null;
-			function slideOn(event) {
-
-				if (event.target.parentNode.href) {
-					var menuTarget=event.target.parentNode.href.replace(window.location,"");
-					if (currentSelectedNode) 
-						currentSelectedNode.className="turnOff";
-					currentSelectedNode = document.getElementById(menuTarget)
-					if (currentSelectedNode) currentSelectedNode.className="turnOn";
-					SLMenu.className = "slideOn";
-					return false;
-				}
-			}
-			function slideOff(event) {
-				if (currentSelectedNode) currentSelectedNode.className="turnOff";
-				SLMenu.className = "slideOff";
-			}
-			document.getElementById("navigation").onclick = slideOn;
-			document.getElementById("backToMainMenu").onclick = slideOff;
-		})();
+		dkSlideMenu(".azureMenuWraper");
 	</script>
 </body>
 </html>
